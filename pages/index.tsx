@@ -158,14 +158,6 @@ const Home: NextPage = () => {
                   that we use to help our clients to live healthier, more
                   confident lives in just six weeks.
                 </p>
-                <button
-                  type="button"
-                  className="inline-block px-6 py-2.5 border-2 border-white text-white font-bold text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="light"
-                >
-                  BOOK NOW
-                </button>
               </div>
             </div>
           </div>
@@ -303,6 +295,23 @@ const Home: NextPage = () => {
                   </div>
                 </li>
               </ul>
+              <div className="flex flex-wrap justify-center mt-10">
+                <a
+                  type="button"
+                  className="inline-block px-6 py-2.5 border-2 border-turq text-turq font-bold text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="light"
+                  href="http://eepurl.com/huf3bv"
+                  //open in new tab
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  BOOK NOW
+                </a>
+                <p className="w-full text-center mt-4">
+                  Click here to book your strategy call with Cameron
+                </p>
+              </div>
             </div>
             <h2 className="mt-10 text-4xl text-center font-semibold text-navy">
               That’s it.
