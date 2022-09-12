@@ -7,12 +7,14 @@ import Call from "../components/Call";
 import dynamic from "next/dynamic";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormFields, useMailChimpForm } from "use-mailchimp-form";
+import { useCookies } from "react-cookie";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const Home: NextPage = () => {
   const [popup, setPopup] = useState(false);
   const [email, setEmail] = useState("");
+  const [cookies, setCookie] = useCookies(["confirmed"]);
   //@ts-ignore
   const player = useRef<ReactPlayer>();
   useEffect(() => {
@@ -30,12 +32,7 @@ const Home: NextPage = () => {
     EMAIL: "",
     tags: "6449266",
   });
-  useEffect(() => {
-    if (success) {
-      setEmail("");
-      setPopup(false);
-    }
-  }, [success]);
+
   const emailRegex = new RegExp("/^S+@S+.S+$/");
   return (
     <div>
@@ -78,7 +75,9 @@ const Home: NextPage = () => {
                       width="100%"
                       height="100%"
                       className="absolute top-0 left-0"
-                      onClickPreview={() => !success && setPopup(true)}
+                      onClickPreview={() =>
+                        !cookies.confirmed && setPopup(true)
+                      }
                       ref={player}
                     />
                   </div>
@@ -95,13 +94,11 @@ const Home: NextPage = () => {
                       <div className="text-black">
                         <form
                           onSubmit={(event) => {
-                            if (
-                              fields.EMAIL !== "" &&
-                              emailRegex.test(fields.EMAIL as string)
-                            ) {
-                              event.preventDefault();
-                              handleSubmit(fields);
-                            }
+                            console.log("test");
+                            event.preventDefault();
+                            handleSubmit(fields);
+                            setCookie("confirmed", true);
+                            setPopup(false);
                           }}
                         >
                           <div className="flex w-full justify-center gap-4 mb-4">
@@ -110,6 +107,7 @@ const Home: NextPage = () => {
                               autoFocus
                               type="email"
                               value={fields.EMAIL as any}
+                              required
                               onChange={handleFieldChange}
                               className="form-control
                             block
@@ -126,7 +124,10 @@ const Home: NextPage = () => {
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-turq focus:outline-none"
                             />
-                            <button className=" px-6 py-2.5 bg-turq text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-turq-dark hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out">
+                            <button
+                              type="submit"
+                              className=" px-6 py-2.5 bg-turq text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-turq-dark hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
+                            >
                               Submit
                             </button>
                           </div>
