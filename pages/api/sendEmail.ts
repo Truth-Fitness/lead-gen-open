@@ -29,6 +29,7 @@ export default async function handler(
     apiKey: process.env.MAILJET_API_KEY,
     apiSecret: process.env.MAILJET_API_SECRET,
   });
+  console.log("got here");
   const request = mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {
@@ -50,7 +51,7 @@ export default async function handler(
   });
   request
     .then((result: any) => {
-      console.log(result.body);
+      console.log("this worked", result.body);
     })
     .catch((err: any) => {
       console.log(err.statusCode);
