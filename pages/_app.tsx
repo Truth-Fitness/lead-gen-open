@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Image from "next/image";
 import { useEffect } from "react";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
@@ -18,9 +19,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </div>
       </nav>
-      <div className=" m-auto">
-        <Component {...pageProps} />
-      </div>
+      <GoogleReCaptchaProvider
+        reCaptchaKey="6LffzxUiAAAAAAnhLy-OrukIg8ZC-Ya3oho1hdf7"
+        scriptProps={{
+          async: false,
+          defer: false,
+          appendTo: "head",
+          nonce: undefined,
+        }}
+      >
+        <div className=" m-auto">
+          <Component {...pageProps} />
+        </div>
+      </GoogleReCaptchaProvider>
     </div>
   );
 }
