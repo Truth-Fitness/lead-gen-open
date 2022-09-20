@@ -30,7 +30,7 @@ export default async function handler(
     apiSecret: process.env.MAILJET_API_SECRET,
   });
   console.log("got here");
-  const request = mailjet.post("send", { version: "v3.1" }).request({
+  const request = await mailjet.post("send", { version: "v3.1" }).request({
     Messages: [
       {
         From: {
@@ -49,13 +49,7 @@ export default async function handler(
       },
     ],
   });
-  request
-    .then((result: any) => {
-      console.log("this worked", result.body);
-    })
-    .catch((err: any) => {
-      console.log(err.statusCode);
-      console.log("this didn't work", err);
-    });
+  console.log("this worked", request.body);
+
   res.status(200).json({ success: true });
 }
