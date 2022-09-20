@@ -38,7 +38,7 @@ export default async function handler(
         },
         To: [
           {
-            Email: "james@grogan.tech",
+            Email: "cameron@truthfitness.co.uk",
             Name: "Cameron",
           },
         ],
