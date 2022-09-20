@@ -55,6 +55,7 @@ export default async function handler(
     })
     .catch((err: any) => {
       console.log(err.statusCode);
+      console.log("this didn't work", err);
     });
   res.status(200).json({ success: true });
 }
