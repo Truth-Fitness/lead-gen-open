@@ -13,11 +13,6 @@ import BookNow from "../components/BookNow";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const Home: NextPage = () => {
-  const [popup, setPopup] = useState(false);
-  const [email, setEmail] = useState("");
-  const [cookies, setCookie] = useCookies(["confirmed"]);
-  //@ts-ignore
-  const player = useRef<ReactPlayer>();
   useEffect(() => {
     const use = async () => {
       (await import("tw-elements")).default;
@@ -25,16 +20,6 @@ const Home: NextPage = () => {
     use();
   }, []);
 
-  console.log(player);
-  const { loading, error, success, message, handleSubmit } = useMailChimpForm(
-    "https://truthgym.us17.list-manage.com/subscribe/post?u=d195bca7b15b09591a2869256&amp;id=12ff7a1116&amp;f_id=005150e0f0"
-  );
-  const { fields, handleFieldChange } = useFormFields({
-    EMAIL: "",
-    tags: "6449266",
-  });
-
-  const emailRegex = new RegExp("/^S+@S+.S+$/");
   return (
     <div>
       <Head>
@@ -76,84 +61,9 @@ const Home: NextPage = () => {
                       width="100%"
                       height="100%"
                       className="absolute top-0 left-0"
-                      onClickPreview={() =>
-                        !cookies.confirmed && setPopup(true)
-                      }
-                      ref={player}
                     />
                   </div>
                 </div>
-                {popup && (
-                  <div
-                    id="myModal"
-                    className="fixed z-50 pt-[100px] left-0 top-0 w-full h-full overflow-auto bg-white bg-opacity-40"
-                  >
-                    <div className="bg-white m-auto p-5 md:w-8/12">
-                      <p className="text-black mb-4">
-                        Hey, to watch the video put your email address in here:
-                      </p>
-                      <div className="text-black">
-                        <form
-                          onSubmit={(event) => {
-                            console.log("test");
-                            event.preventDefault();
-                            handleSubmit(fields);
-                            setCookie("confirmed", true);
-                            setPopup(false);
-                          }}
-                        >
-                          <div className="flex w-full justify-center gap-4 mb-4">
-                            <input
-                              id="EMAIL"
-                              autoFocus
-                              type="email"
-                              value={fields.EMAIL as any}
-                              required
-                              onChange={handleFieldChange}
-                              className="form-control
-                            block
-                            px-3
-                            py-1.5
-                            text-base
-                            font-normal
-                            text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            m-0
-                            focus:text-gray-700 focus:bg-white focus:border-turq focus:outline-none"
-                            />
-                            <button
-                              type="submit"
-                              className=" px-6 py-2.5 bg-turq text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-turq-dark hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0  active:shadow-lg transition duration-150 ease-in-out"
-                            >
-                              Submit
-                            </button>
-                          </div>
-                          {loading && "submitting"}
-                          {error && message}
-                          {success && message}
-                        </form>
-                      </div>
-                      <p className="text-black mb-4">
-                        {
-                          "Don't worry, we won't bombard you with spam, we'll just ask for some feedback in a couple of days time."
-                        }
-                      </p>
-                      <button
-                        onClick={() => {
-                          setPopup(false);
-                          player.current?.retry();
-                        }}
-                        className="inline-block px-6 py-2.5 border-2 border-turq text-turq font-bold text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                )}
 
                 <p className="w-full mb-8">
                   The secrets described in this video are the exact same ones
