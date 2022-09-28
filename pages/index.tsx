@@ -228,14 +228,14 @@ const Home: NextPage = () => {
                 <Call />
               </div>
             </div>
-            <div className="mb-20">
+            <div className="mb-20 max-w-full">
               <h2 className="mt-10 mb-10 text-4xl text-center font-semibold text-navy">
                 Our Results
               </h2>
               <Carousel
                 wrapAround={true}
                 slidesToShow={2}
-                cellSpacing={20}
+                cellSpacing={10}
                 withoutControls={true}
                 autoplay={true}
                 autoplayInterval={3000}
