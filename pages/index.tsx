@@ -20,7 +20,7 @@ const Home: NextPage = () => {
     };
     use();
   }, []);
-  const testimonials = [1, 2, 3, 4, 5, 6, 7, 8];
+  const testimonials = [1, 2, 3, 4, 5, 6, 7];
 
   return (
     <div>
