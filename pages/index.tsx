@@ -59,10 +59,10 @@ const Home: NextPage = () => {
                   <div className=" pt-[51.25%] md:pt-[46.25%] relative w-11/12 md:w-10/12 lg:w-9/12 lg:pt-[42.5%]">
                     <ReactPlayer
                       url="https://youtu.be/wICQISSNFyQ"
-                      light="/videothumbnail.jpg"
                       width="100%"
                       height="100%"
                       className="absolute top-0 left-0"
+                      playing={true}
                     />
                   </div>
                 </div>
